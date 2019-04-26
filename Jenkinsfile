@@ -46,18 +46,11 @@ pipeline{
                 }
             }
         }
-        stage('run-artifact'){
-            steps{
-                sh '''
-                    docker rm -f simple-lagom-container
-                    docker run -d --env-file /home/knoldus/env2.list --name simple-lagom-container -p 9000:9000 azmathasan92/simple-lagom-application:1.0
-                '''
-            }
-        }
+
    }
            post{
                always{
-                   echo "this will always executed"
+                   echo "Complete CI pipeline"
                }
            }
 }
