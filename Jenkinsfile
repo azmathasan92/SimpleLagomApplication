@@ -29,6 +29,10 @@ pipeline{
               }
         }
         stage('genarate-artifact'){
+            when {
+                branch 'master'
+                branch 'develop'
+            }
             steps{
                 sh '''
                     sbt docker:publishLocal
@@ -36,6 +40,10 @@ pipeline{
             }
         }
         stage('store-artifact'){
+            when {
+                branch 'master'
+                branch 'develop'
+            }
             steps{
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'d32aee8b-31fc-4eed-aeca-b01945bcb4f6', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                      sh '''
@@ -47,6 +55,9 @@ pipeline{
             }
         }
         stage('run-artifact'){
+            when {
+                branch 'master'
+            }
             steps{
                 sh '''
                     docker rm -f simple-lagom-container
