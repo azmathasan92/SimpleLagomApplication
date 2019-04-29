@@ -5,10 +5,9 @@ pipeline{
         stage('environment'){
             steps {
                    sh '''
-                   ls -l
                    chmod 777 env_ver
-
-                     source ./env_ver
+                   ls -l
+                   . env_ver
                    '''
             }
         }
