@@ -1,14 +1,11 @@
 pipeline{
     agent { label 'master' }
-            environment {
-                ENV_VARIABLES= credentials('7a7661d0-7584-4625-8332-036bbd0c6ce5')
-            }
 
     stages{
         stage('environment'){
             steps {
                    sh '''
-                     source $ENV_VARIABLES
+                     source env_ver
                    '''
             }
         }
