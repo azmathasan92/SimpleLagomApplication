@@ -1,6 +1,9 @@
 pipeline{
     agent { label 'master' }
+environment {
+        env_ver= credentials('2e3ac819-1bf5-4756-8d2b-281b2f0ec373')
 
+    }
     stages{
         stage('environment'){
             steps {
