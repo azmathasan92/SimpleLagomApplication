@@ -1,19 +1,11 @@
 pipeline{
     agent { label 'master' }
             environment {
-                AKKA_HOSTNAME='0.0.0.0'
-                AKKA_PORT='2555'
-                AKKA_BIND_HOSTNAME='0.0.0.0'
-                AKKA_BIND_PORT='2555'
-                AKKA_STARTUP_TIMEOUT='30s'
-                APPLICATION_SECRET='none'
-                HTTP_PORT='9000'
-                CASSANDRA_KEYSPACE='product'
-                CAS_CONTACT_POINT_ONE='192.168.2.116'
-                CAS_CONTACT_POINTS_PORT='9042'
+                ENV_VARIABLES= credentials('7a7661d0-7584-4625-8332-036bbd0c6ce5')
             }
 
     stages{
+
         stage('code-compile'){
             steps {
                    sh '''
