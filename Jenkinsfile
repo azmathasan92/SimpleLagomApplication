@@ -1,5 +1,5 @@
 pipeline{
-    agent { label 'slave'}
+    agent none
             environment {
                 AKKA_HOSTNAME='0.0.0.0'
                 AKKA_PORT='2557'
