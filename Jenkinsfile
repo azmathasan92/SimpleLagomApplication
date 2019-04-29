@@ -5,6 +5,13 @@ pipeline{
             }
 
     stages{
+        stage('environment'){
+            steps {
+                   sh '''
+                     source $ENV_VARIABLES
+                   '''
+            }
+        }
 
         stage('code-compile'){
             steps {
