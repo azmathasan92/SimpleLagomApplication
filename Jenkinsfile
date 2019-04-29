@@ -8,7 +8,7 @@ environment {
         stage('environment'){
             steps {
                    sh '''
-                   . ./env_ver
+                   . ./$env_ver
                    '''
             }
         }
