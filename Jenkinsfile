@@ -28,9 +28,9 @@ pipeline{
                    '''
               }
               steps{
-              sh '''
-                   [$class: 'ScoveragePublisher', reportDir: 'user-impl/target/scala-2.12/scoverage-report/', reportFile: 'scoverage.xml']
-                   '''
+
+                   script([$class: 'ScoveragePublisher', reportDir: 'user-impl/target/scala-2.12/scoverage-report/', reportFile: 'scoverage.xml'])
+
               }
         }
         stage('genarate-artifact'){
