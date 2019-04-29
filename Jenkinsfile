@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent { label 'master' }
             environment {
                 AKKA_HOSTNAME='0.0.0.0'
                 AKKA_PORT='2555'
@@ -14,6 +14,7 @@ pipeline{
             }
 
     stages{
+
         stage('code-compile'){
             steps {
                    sh '''
@@ -21,17 +22,19 @@ pipeline{
                    '''
             }
         }
+
         stage('unit-test'){
               steps {
                    sh '''
                      sbt coverage test coverageReport
                    '''
+                   step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
               }
         }
+
         stage('genarate-artifact'){
             when {
-                branch 'master'
-                branch 'develop'
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
             }
             steps{
                 sh '''
@@ -39,10 +42,10 @@ pipeline{
                 '''
             }
         }
+
         stage('store-artifact'){
             when {
-                branch 'master'
-                branch 'develop'
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
             }
             steps{
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'d32aee8b-31fc-4eed-aeca-b01945bcb4f6', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
@@ -54,6 +57,7 @@ pipeline{
                 }
             }
         }
+
         stage('run-artifact'){
             when {
                 branch 'master'
@@ -68,7 +72,7 @@ pipeline{
    }
            post{
                always{
-                   echo "this will always executed"
+                   echo "unit test done"
                }
            }
 }
