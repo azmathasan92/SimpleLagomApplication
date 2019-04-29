@@ -8,9 +8,6 @@ environment {
         stage('environment'){
             steps {
                    sh '''
-                   chmod 777 env_ver
-                   ls -l
-                   pwd
                    . ./env_ver
                    '''
             }
