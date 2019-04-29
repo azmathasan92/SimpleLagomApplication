@@ -23,6 +23,7 @@ lazy val `product-api` = (project in file("product-api"))
 
 lazy val `product-impl` = (project in file("product-impl"))
   .enablePlugins(LagomScala)
+  .settings(dockerBaseImage := "openjdk:8-jdk-alpine")
   .settings(
     libraryDependencies ++= Seq(
       lagomScaladslPersistenceCassandra,
