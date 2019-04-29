@@ -7,7 +7,8 @@ pipeline{
                    sh '''
                    chmod 777 env_ver
                    ls -l
-                   . env_ver
+                   pwd
+                   . ./env_ver
                    '''
             }
         }
