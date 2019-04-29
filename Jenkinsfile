@@ -1,6 +1,7 @@
 pipeline{
 
     agent any
+
             environment {
                 AKKA_HOSTNAME='0.0.0.0'
                 AKKA_PORT='2556'
