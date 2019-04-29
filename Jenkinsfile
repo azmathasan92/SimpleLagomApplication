@@ -9,7 +9,7 @@ pipeline{
                 APPLICATION_SECRET='none'
                 HTTP_PORT='9000'
                 CASSANDRA_KEYSPACE='product'
-                CAS_CONTACT_POINT_ONE='192.168.2.116'
+                CAS_CONTACT_POINT_ONE='localhost'
                 CAS_CONTACT_POINTS_PORT='9042'
             }
 
@@ -57,6 +57,7 @@ pipeline{
                 }
             }
         }
+
 
         stage('run-artifact'){
             when {
