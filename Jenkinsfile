@@ -26,12 +26,12 @@ pipeline{
                    sh '''
                      sbt coverage test coverageReport
                    '''
+                   script {[$class: 'ScoveragePublisher', reportDir: 'user-impl/target/scala-2.12/scoverage-report/', reportFile: 'scoverage.xml']}
               }
         }
         stage('genarate-artifact'){
             when {
-                branch 'master'
-                branch 'develop'
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
             }
             steps{
                 sh '''
@@ -41,8 +41,7 @@ pipeline{
         }
         stage('store-artifact'){
             when {
-                branch 'master'
-                branch 'develop'
+                 expression { BRANCH_NAME ==~ /(master|develop)/ }
             }
             steps{
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'d32aee8b-31fc-4eed-aeca-b01945bcb4f6', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
