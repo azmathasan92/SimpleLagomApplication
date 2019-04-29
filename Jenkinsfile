@@ -5,7 +5,7 @@ pipeline{
         stage('environment'){
             steps {
                    sh '''
-                     source env_ver
+                     cat env_ver
                    '''
             }
         }
