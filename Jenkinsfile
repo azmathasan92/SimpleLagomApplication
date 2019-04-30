@@ -4,6 +4,13 @@ pipeline{
     stages{
         stage('environment'){
             steps{
+            node {
+              dir('subdir') {
+                withCredentials([file(credentialsId: 'c10510bf-13b2-457d-bf47-7b29df719a42', variable: 'FILE')]) {
+                  sh 'use $FILE'
+                }
+              }
+            }
                     withCredentials([file(credentialsId: 'c10510bf-13b2-457d-bf47-7b29df719a42', variable: 'env')]) {
                      sh '''
                         echo "$env"
