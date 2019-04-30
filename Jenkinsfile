@@ -9,6 +9,7 @@ environment {
             steps {
                    sh '''
                    chmod 777 $env_ver
+                   cat $env_ver
                      . ./$env_ver
 
                    '''
