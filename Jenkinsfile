@@ -2,6 +2,17 @@ pipeline{
     agent { label 'master' }
 
     stages{
+        stage('environment'){
+            steps{
+                    withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'env')]) {
+                     sh '''
+                        echo "$env"
+                        chmod 777 $env
+                        . ./$env
+                    '''
+                }
+            }
+        }
 
         stage('code-compile'){
             steps {
