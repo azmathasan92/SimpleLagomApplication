@@ -8,8 +8,8 @@ environment {
         stage('environment'){
             steps {
                    sh '''
-                   $env_ver cp env
-                   cat env
+                   base64 $env_ver > encodedData.txt
+                   cat encodedData.txt
                    '''
             }
         }
