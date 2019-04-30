@@ -10,7 +10,6 @@ pipeline{
                         chmod 777 $env
                         cat $env
                         . ./$env
-                        echo $AKKA_PORT
                     '''
                 }
             }
