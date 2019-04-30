@@ -8,8 +8,10 @@ environment {
         stage('environment'){
             steps {
                    sh '''
-
+echo "$AKKA_HOSTNAME"
                       `$env_ver`
+
+                      echo "$AKKA_HOSTNAME"
                    '''
             }
         }
