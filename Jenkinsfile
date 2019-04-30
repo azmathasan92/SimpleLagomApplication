@@ -8,7 +8,7 @@ pipeline{
                      sh '''
                         echo "$env"
                         chmod 777 $env
-                        . ./$env
+                        use $env
                     '''
                 }
             }
