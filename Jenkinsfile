@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('environment'){
             steps{
-                    withCredentials([file(credentialsId: 'PRIVATE_KEY', variable: 'env')]) {
+                    withCredentials([file(credentialsId: 'c10510bf-13b2-457d-bf47-7b29df719a42', variable: 'env')]) {
                      sh '''
                         echo "$env"
                         chmod 777 $env
