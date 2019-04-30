@@ -6,12 +6,10 @@ pipeline{
             steps {
                   withCredentials([file(credentialsId: 'c10510bf-13b2-457d-bf47-7b29df719a42', variable: 'env_ver'){
                    sh '''
-                       chmod 777 $env_ver
-                        cat $env_ver
-                     . ./$env_ver
+
                    '''
                   }
-            }
+                  }
         }
 
         stage('code-compile'){
