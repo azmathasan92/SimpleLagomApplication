@@ -8,6 +8,7 @@ environment {
         stage('environment'){
             steps {
                    sh '''
+                   chmod 777 $env_ver
                      . ./$env_ver
 
                    '''
