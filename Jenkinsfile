@@ -18,20 +18,20 @@ pipeline{
         }
 
     stages{
-        stage('environment'){
 
+        stage('environment'){
             steps{
                      sh '''
-                        export $AKKA_HOSTNAME
-                        export $AKKA_PORT3
-                        export $AKKA_BIND_HOSTNAME
-                        export $AKKA_BIND_PORT3
-                        export $AKKA_STARTUP_TIMEOUT
-                        export $APPLICATION_SECRET
-                        export $HTTP_PORT
-                        export $CASSANDRA_KEYSPACE
-                        export $CAS_CONTACT_POINT_ONE
-                        export $CAS_CONTACT_POINTS_PORT
+                        export AKKA_HOSTNAME
+                        export AKKA_PORT3
+                        export AKKA_BIND_HOSTNAME
+                        export AKKA_BIND_PORT3
+                        export AKKA_STARTUP_TIMEOUT
+                        export APPLICATION_SECRET
+                        export HTTP_PORT
+                        export CASSANDRA_KEYSPACE
+                        export CAS_CONTACT_POINT_ONE
+                        export CAS_CONTACT_POINTS_PORT
 
                     '''
             }
@@ -44,6 +44,7 @@ pipeline{
                    '''
             }
         }
+
         stage('unit-test'){
               steps {
                    sh '''
@@ -52,6 +53,7 @@ pipeline{
                    step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
               }
         }
+
         stage('genarate-artifact'){
             when {
                  expression { BRANCH_NAME ==~ /(master|develop)/ }
@@ -62,6 +64,7 @@ pipeline{
                 '''
             }
         }
+
         stage('store-artifact'){
             when {
                  expression { BRANCH_NAME ==~ /(master|develop)/ }
@@ -76,6 +79,7 @@ pipeline{
                 }
             }
         }
+
         stage('run-artifact'){
             when {
                 branch 'master'
@@ -87,10 +91,6 @@ pipeline{
                 '''
             }
         }
+
    }
-           post{
-               always{
-                   echo "unit test done"
-               }
-           }
 }
