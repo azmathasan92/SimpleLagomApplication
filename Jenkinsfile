@@ -1,17 +1,17 @@
 pipeline{
     agent { label 'master' }
-            environment {
-                AKKA_HOSTNAME='0.0.0.0'
-                AKKA_PORT='2555'
-                AKKA_BIND_HOSTNAME='0.0.0.0'
-                AKKA_BIND_PORT='2555'
-                AKKA_STARTUP_TIMEOUT='30s'
-                APPLICATION_SECRET='none'
-                HTTP_PORT='9000'
-                CASSANDRA_KEYSPACE='product'
-                CAS_CONTACT_POINT_ONE='localhost'
-                CAS_CONTACT_POINTS_PORT='9042'
-            }
+        environment {
+                 AKKA_HOSTNAME="0.0.0.0"
+                 AKKA_PORT="2555"
+                 AKKA_BIND_HOSTNAME="0.0.0.0"
+                 AKKA_BIND_PORT="2555"
+                 AKKA_STARTUP_TIMEOUT="30s"
+                 APPLICATION_SECRET="none"
+                 HTTP_PORT="9000"
+                 CASSANDRA_KEYSPACE="product"
+                 CAS_CONTACT_POINT_ONE="localhost"
+                 CAS_CONTACT_POINTS_PORT="9042"
+        }
 
     stages{
 
@@ -28,8 +28,24 @@ pipeline{
                    sh '''
                      sbt coverage test coverageReport
                    '''
-                   step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
               }
+        }
+
+        stage('generate-reports'){
+            parallel {
+                      stage('test-coverage-report') {
+                          steps {
+                              step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
+                          }
+                      }
+                      stage('scalastyle') {
+                          steps {
+                              sh '''
+                                  sbt scalastyle
+                              '''
+                          }
+                      }
+        }
         }
 
         stage('genarate-artifact'){
@@ -58,7 +74,6 @@ pipeline{
             }
         }
 
-
         stage('run-artifact'){
             when {
                 branch 'master'
@@ -70,10 +85,6 @@ pipeline{
                 '''
             }
         }
+
    }
-           post{
-               always{
-                   echo "unit test done"
-               }
-           }
 }
