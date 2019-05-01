@@ -38,6 +38,13 @@ pipeline{
                               step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
                           }
                       }
+                      stage('scalastyle') {
+                          steps {
+                              sh '''
+                                  sbt scalastyle
+                              '''
+                          }
+                      }
         }
         }
 
