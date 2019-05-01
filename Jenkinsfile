@@ -19,24 +19,6 @@ pipeline{
 
     stages{
 
-        stage('environment'){
-            steps{
-                     sh '''
-                        export AKKA_HOSTNAME
-                        export AKKA_PORT3
-                        export AKKA_BIND_HOSTNAME
-                        export AKKA_BIND_PORT3
-                        export AKKA_STARTUP_TIMEOUT
-                        export APPLICATION_SECRET
-                        export HTTP_PORT
-                        export CASSANDRA_KEYSPACE
-                        export CAS_CONTACT_POINT_ONE
-                        export CAS_CONTACT_POINTS_PORT
-
-                    '''
-            }
-        }
-
         stage('code-compile'){
             steps {
                    sh '''
