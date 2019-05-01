@@ -1,16 +1,16 @@
 pipeline{
     agent { label 'master' }
         environment {
-                 AKKA_HOSTNAME="0.0.0.0"
-                 AKKA_PORT="2556"
-                 AKKA_BIND_HOSTNAME="0.0.0.0"
-                 AKKA_BIND_PORT="2556"
-                 AKKA_STARTUP_TIMEOUT="30s"
-                 APPLICATION_SECRET="none"
-                 HTTP_PORT="9000"
-                 CASSANDRA_KEYSPACE="product"
-                 CAS_CONTACT_POINT_ONE="localhost"
-                 CAS_CONTACT_POINTS_PORT="9042"
+            AKKA_HOSTNAME = credentials('2e3ac819-1bf5-4756-8d2b-281b2f0ec373')
+            AKKA_PORT = credentials('3ebdae09-82f5-44cd-9c37-e8dad8a3c13a')
+            AKKA_BIND_HOSTNAME = credentials('37945514-bc0f-4405-ab2b-3aca5eaea802')
+            AKKA_BIND_PORT = credentials('ddb5179e-6ef7-43f6-a32a-f4ab791066b2')
+            AKKA_STARTUP_TIMEOUT = credentials('60ac6db2-ad0e-4e34-905e-3605e308c015')
+            APPLICATION_SECRET = credentials('0bcba992-ba11-4c22-a4be-b86f0f465915')
+            HTTP_PORT = credentials('f05168d3-86b3-44ef-a607-aa9ff437fdac')
+            CASSANDRA_KEYSPACE = credentials('cc68600b-c967-48a7-9c4d-cb39beb18f51')
+            CAS_CONTACT_POINT_ONE = credentials('43e619e9-f493-41d0-84f7-89d3c77d90b7')
+            CAS_CONTACT_POINTS_PORT = credentials('f1e6427b-d88f-4a47-9cec-3db413001971')
         }
 
     stages{
