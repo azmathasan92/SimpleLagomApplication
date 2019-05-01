@@ -28,8 +28,17 @@ pipeline{
                    sh '''
                      sbt coverage test coverageReport
                    '''
-                   step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
               }
+        }
+
+        stage('generate-reports'){
+            parallel {
+                      stage('test-coverage-report') {
+                          steps {
+                              step([$class: 'ScoveragePublisher', reportDir: 'product-impl/target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
+                          }
+                      }
+        }
         }
 
         stage('genarate-artifact'){
