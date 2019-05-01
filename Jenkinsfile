@@ -2,7 +2,7 @@ pipeline{
     agent { label 'master' }
         environment {
             AKKA_HOSTNAME = credentials('2e3ac819-1bf5-4756-8d2b-281b2f0ec373')
-            AKKA_PORT1 = credentials('c1d7d272-5da4-4ed2-ac5c-97fd61d86d19')
+            AKKA_PORT = credentials('c1d7d272-5da4-4ed2-ac5c-97fd61d86d19')
             AKKA_PORT2 = credentials('7e65bb7c-c173-4ce3-8f08-a9cc7bf625c2')
             AKKA_PORT3 = credentials('3ebdae09-82f5-44cd-9c37-e8dad8a3c13a')
             AKKA_BIND_HOSTNAME = credentials('37945514-bc0f-4405-ab2b-3aca5eaea802')
