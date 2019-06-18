@@ -20,10 +20,10 @@ lazy val `product-api` = (project in file("product-api"))
       lagomScaladslApi
     )
   )
+//  .settings(dockerBaseImage := "openjdk:8-jdk-alpine")
 
 lazy val `product-impl` = (project in file("product-impl"))
   .enablePlugins(LagomScala)
-  .settings(dockerBaseImage := "openjdk:8-jdk-alpine")
   .settings(
     libraryDependencies ++= Seq(
       lagomScaladslPersistenceCassandra,
@@ -38,5 +38,13 @@ lazy val `product-impl` = (project in file("product-impl"))
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(`product-api`)
 
+coverageMinimum in ThisBuild := 50
+coverageFailOnMinimum in ThisBuild := true
+scalastyleFailOnError in ThisBuild := true
+scalastyleFailOnWarning in ThisBuild := true
+
+lagomKafkaEnabled in ThisBuild := false
+lagomCassandraEnabled in ThisBuild := false
+lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "http://localhost:9042")
 
 
